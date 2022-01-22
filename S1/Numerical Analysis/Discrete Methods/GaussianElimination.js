@@ -6,7 +6,7 @@
 */
 
 // Ax = b
-let aug = [
+let augmentedMatrix = [
 	[+1, +1, +0, +3, +4],
 	[+2, +1, -1, +1, +1],
 	[+3, -1, -1, +2, -3],
@@ -51,4 +51,4 @@ const gauss = (aug) => {
 	return zeros.map((e) => Number(e.toFixed(2)) + 0)
 }
 
-console.log(gauss(aug))
+console.log(gauss(augmentedMatrix))
