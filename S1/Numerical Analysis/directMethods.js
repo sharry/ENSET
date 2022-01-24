@@ -5,13 +5,14 @@
  */
 
 const aux = require('./auxiliary')
+const mat = require('./matrices')
 
 // 1) Gaussian elimination
 
 // Takes an augmented matrix and return the solution (assumes finite solution)
 const Gauss = (aug) => {
 	// Get the row-echelon form of the augmented matrix
-	let ref = aux.ref(aug)
+	let ref = mat.ref(aug)
 	let zeros = []
 	// Solve the system
 	for (let i = aug.length - 1; i >= 0; i--) {
@@ -60,7 +61,7 @@ const LU = (matrix) => {
 // 3) Gauss-Jordan Elimination
 
 const GaussJordan = (aug) => {
-	let ref = aux.ref(aug)
+	let ref = mat.ref(aug)
 	// Reduced row-echelon form
 	for (let i = ref.length - 1; i > 0; i--) {
 		for (let j = i - 1; j >= 0; j--) {
@@ -79,7 +80,36 @@ const GaussJordan = (aug) => {
 	return { reducedRef: reducedRef, zeros: zeros }
 }
 
-// Tests
+// Cholesky Elimination
+const Cholesky = (matrix) => {
+	if (mat.compare(matrix, mat.transpose(matrix)) === false)
+		return console.log('This matrix is not symmetric')
+	let l = matrix.slice().map((e) => e.slice())
+	for (let i = 0; i < l.length; i++) {
+		for (let j = 0; j < l.length; j++) {
+			if (i === j) {
+				let a = matrix[i][i]
+				let sig = 0
+				for (let k = 0; k < i; k++) {
+					sig += l[i][k] * l[i][k]
+				}
+				l[i][i] = Math.sqrt(a - sig)
+			} else if (i > j) {
+				let d = 1 / l[j][j]
+				let a = matrix[i][j]
+				let sig = 0
+				for (let k = 0; k < j; k++) {
+					sig += l[i][k] * l[j][k]
+				}
+				l[i][j] = d * (a - sig)
+			} else l[i][j] = 0
+		}
+	}
+	return { L: l, tL: mat.transpose(l) }
+}
+// }
+
+// DRIVER CODE
 
 /* The System of Linear Equations we are testing:
         x₁ + x₂ + 3x₄ = 4
@@ -134,9 +164,9 @@ console.log('\nU = \n' + upper.map((d) => '\t' + d.join('\t')).join('\n\n'))
 
 // Ax = b <=>	Ly = b
 // 				Ux = y
-const y = aux.solveLower(lower, b)
+const y = mat.solveLower(lower, b)
 console.log(`\ny = {${y.map((e, i) => ` y${aux.subscript(i + 1)} = ${e}`)} }`)
-const x = aux.solveUpper(upper, y)
+const x = mat.solveUpper(upper, y)
 console.log(
 	`Solution set: {${x.map((e, i) => ` x${aux.subscript(i + 1)} = ${e}`)} }`
 )
@@ -160,4 +190,27 @@ console.log(
 	`\nSolution Set = {${gaussJordan.zeros.map(
 		(e, i) => ` x${aux.subscript(i + 1)} = ${e}`
 	)} }\n\n`
+)
+
+// Ax = b <=>	Ly = x
+//				ᵗLx = y
+
+const cholesky = Cholesky([
+	[1, 1, 3],
+	[1, 5, 5],
+	[3, 5, 19],
+])
+
+console.log(
+	'# Cholesky decomposition:\n\nL =\n' +
+		cholesky.L.map((d) => '\t' + d.join('\t')).join('\n\n') +
+		'\nᵗL = \n' +
+		cholesky.tL.map((d) => '\t' + d.join('\t')).join('\n\n') +
+		'\n\nWith ᵗL L = A'
+)
+
+const yp = mat.solveLower(cholesky.L, b)
+const xp = mat.solveUpper(cholesky.tL, yp)
+console.log(
+	`Solution set: {${xp.map((e, i) => ` x${aux.subscript(i + 1)} = ${e}`)} }`
 )
