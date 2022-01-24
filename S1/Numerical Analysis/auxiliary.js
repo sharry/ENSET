@@ -7,6 +7,7 @@ const subscript = (num) => {
 	}
 	return str
 }
+
 // Multiply 2 matrices
 const multiply = (A, B) => {
 	var aNumRows = A.length,
@@ -24,6 +25,7 @@ const multiply = (A, B) => {
 	}
 	return product
 }
+
 // convert Ax = b to augmented matrix
 const augment = (A, b) => {
 	i = 0
@@ -56,10 +58,60 @@ const solveLower = (L, b) => {
 	return zeros.map((e) => Number(e.toFixed(2)) + 0)
 }
 
+// Row-echelon form
+const ref = (aug) => {
+	for (let i = 0; i < aug.length; i++) {
+		// Get the pivot row
+		pivot = Math.abs(aug[i][i])
+		pivotRow = i
+		for (let j = i + 1; j < aug.length; j++) {
+			if (Math.abs(aug[j][i]) > pivot) {
+				pivot = aug[j][i]
+				pivotRow = j
+			}
+		}
+		// Swap the current with the pivot row
+		for (let j = i; j <= aug.length; j++) {
+			let tmp = aug[pivotRow][j]
+			aug[pivotRow][j] = aug[i][j]
+			aug[i][j] = tmp
+		}
+		// Row-echelon form
+		for (let j = i + 1; j < aug.length; j++) {
+			let c = aug[j][i] / aug[i][i]
+			for (let k = i; k <= aug.length; k++) {
+				aug[j][k] -= c * aug[i][k]
+			}
+		}
+	}
+	let ref = new Array(aug.length)
+	for (let i = 0; i < aug.length; ++i) {
+		ref[i] = new Array(aug.length + 1)
+		for (let j = 0; j < aug.length + 1; ++j) {
+			ref[i][j] = aug[i][j]
+		}
+	}
+	return ref
+}
+
+const formatMatrixRow = (row) => {
+	var outStr = ''
+	if (row.length === 1) {
+		outStr = row[0]
+	} else if (row.length === 2) {
+		outStr = row.join('   |   ')
+	} else if (row.length > 2) {
+		outStr = row.slice(0, -1).join('     ') + '   |   ' + row.slice(-1)
+	}
+	return outStr
+}
+
 module.exports = {
 	subscript: subscript,
 	multiply: multiply,
 	augment: augment,
 	solveUpper: solveUpper,
 	solveLower: solveLower,
+	formatMatrixRow: formatMatrixRow,
+	ref: ref,
 }
