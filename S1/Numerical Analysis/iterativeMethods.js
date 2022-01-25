@@ -62,7 +62,7 @@ const hasStrictlyDominantDiagonal = (matrix) => {
       Ax = b :
             ┌           ┐
             │ 4  -1   0 │       
-      A =   │-1   4  -1 │  ;  b = {6, 4, 6}
+      A =   │-1   4  -1 │  ;  b = [6, 4, 6]
             │ 0  -1   4 │
             └           ┘
 */
