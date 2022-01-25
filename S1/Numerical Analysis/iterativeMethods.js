@@ -60,11 +60,11 @@ const hasStrictlyDominantDiagonal = (matrix) => {
             -x₂ + 4x₃  = 6
     
       Ax = b :
-            ┌           ┐
-            │ 4  -1   0 │       
-      A =   │-1   4  -1 │  ;  b = [6, 4, 6]
-            │ 0  -1   4 │
-            └           ┘
+            ┌             ┐
+            │  4  -1   0  │       
+      A =   │ -1   4  -1  │  ;  b = [6, 4, 6]
+            │  0  -1   4  │
+            └             ┘
 */
 
 // Check if the Jacobi and Gauss-Seidel methods are converging
