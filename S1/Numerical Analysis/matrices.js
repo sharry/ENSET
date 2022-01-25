@@ -118,19 +118,6 @@ const determinant = (matrix) => {
 	return det
 }
 
-// Has the matrix a dominant diagonal or not?
-const dominantDiagonal = (matrix) => {
-	for (let i = 0; i < matrix.length; i++) {
-		let diagonal = Math.abs(matrix[i][i])
-		let sum = 0
-		for (let j = 0; j < matrix.length; j++) {
-			sum += Math.abs(matrix[i][j])
-		}
-		if (sum - diagonal > diagonal) return false
-	}
-	return true
-}
-
 module.exports = {
 	multiply,
 	augment,
@@ -140,5 +127,4 @@ module.exports = {
 	transpose,
 	compare,
 	determinant,
-	dominantDiagonal,
 }
