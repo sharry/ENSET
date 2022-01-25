@@ -39,7 +39,7 @@ const GaussSeidel = (A, b, init, iterationsNumber) => {
 }
 
 // Strictly dominant diagonal
-// |aᵢᵢ| > ⱼ≠ᵢΣ|aᵢⱼ| ; ∀i ∈ [1, n]
+// |aᵢᵢ| > ⱼ≠ᵢΣ|aᵢⱼ| ; ∀i ∈ {1, ..., n}
 const hasStrictlyDominantDiagonal = (matrix) => {
 	for (let i = 0; i < matrix.length; i++) {
 		let diagonal = Math.abs(matrix[i][i])
