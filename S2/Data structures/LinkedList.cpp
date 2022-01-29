@@ -1,22 +1,22 @@
 #include "LinkedList.h"
 
-// Functions definitions
-LinkedList::LinkedList(Node* head)
+// Functions definition
+LinkedList::LinkedList(Node *head)
 {
 	this->head = head;
 }
 LinkedList::LinkedList(int val)
 {
-	Node* head = new Node(val);
+	Node *head = new Node(val);
 	this->head = head;
 }
-void LinkedList::setHead(Node* head)
+void LinkedList::setHead(Node *head)
 {
 	this->head = head;
 }
 void LinkedList::append(int val)
 {
-	Node* node = new Node(val);
+	Node *node = new Node(val);
 	auto curr = this->head;
 	while (curr)
 	{
@@ -30,7 +30,7 @@ void LinkedList::append(int val)
 }
 void LinkedList::insertAt(int pos, int val)
 {
-	Node* node = new Node(val);
+	Node *node = new Node(val);
 	auto curr = this->head;
 	int currPos = 0;
 	if (pos == 0)
@@ -56,14 +56,14 @@ void LinkedList::insertAt(int pos, int val)
 		currPos++;
 		curr = curr->next;
 	}
-		
 }
 void LinkedList::display()
 {
 	auto curr = this->head;
 	int index = 0;
-	std::cout << std::endl << "| Index\t| Value\t|" << std::endl
-		<< "|---------------|" << std::endl;
+	std::cout << std::endl
+			  << "| Index\t| Value\t|" << std::endl
+			  << "|---------------|" << std::endl;
 	while (curr)
 	{
 		std::cout << "|" << index << "\t|" << curr->value << "\t|" << std::endl;
@@ -96,8 +96,8 @@ int LinkedList::occurrencesCount(int val)
 }
 void LinkedList::deleteFirst(int val)
 {
-	Node* curr = this->head;
-	Node* prev = NULL;
+	Node *curr = this->head;
+	Node *prev = NULL;
 	while (curr)
 	{
 		if (curr->value == val)
@@ -133,7 +133,7 @@ void LinkedList::deleteNth(int n, int val)
 {
 	int currN = 0;
 	auto curr = this->head;
-	Node* prev = NULL;
+	Node *prev = NULL;
 	while (curr)
 	{
 		if (curr->value == val)
@@ -167,8 +167,8 @@ void LinkedList::deleteAt(int index)
 		delete head;
 	}
 	int currIndex = 0;
-	Node* curr = this->head;
-	Node* prev = NULL;
+	Node *curr = this->head;
+	Node *prev = NULL;
 	while (curr)
 	{
 		if (currIndex == index)
@@ -199,7 +199,7 @@ int LinkedList::positionOfFirst(int val)
 	std::cout << val << " does not exist in the list.";
 	return -1;
 }
-int* LinkedList::positionsOf(int val)
+int *LinkedList::positionsOf(int val)
 {
 	int const occ = this->occurrencesCount(val);
 	if (occ == 0)
