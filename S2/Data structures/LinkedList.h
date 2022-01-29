@@ -2,6 +2,8 @@
 // Inserting: Beggining: O(1) Middle & End: O(n)
 // Deleting : Beggining: O(1) Middle & End: O(n)
 
+#pragma once
+
 #include <iostream>
 #include <memory>
 
@@ -11,7 +13,7 @@ struct Node
 	// Value of the node
 	int value;
 	// Address of the next node
-	Node* next;
+	Node *next;
 	// Make a new node
 	Node(int value)
 	{
@@ -23,13 +25,14 @@ struct Node
 class LinkedList
 {
 private:
-	Node* head;
+	Node *head;
+
 public:
 	// Constructors
-	LinkedList(Node*);
+	LinkedList(Node *);
 	LinkedList(int);
 	// Set the list head
-	void setHead(Node*);
+	void setHead(Node *);
 	// Print to the console the elements of the list
 	void display();
 	// Append to the end of the list
@@ -53,7 +56,7 @@ public:
 	// Position of the first node with the value val
 	int positionOfFirst(int);
 	// All positions of nodes with the value val
-	int* positionsOf(int);
+	int *positionsOf(int);
 	// Value in the node the a given index
 	int valueAt(int);
 	// Sort the list;
