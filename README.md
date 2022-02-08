@@ -1,2 +1,1 @@
-<strong>Created by:</strong> Youssef BEN SADIK<br/>
-GLSID
+<strong>Made by:</strong> Youssef BEN SADIK (GLSID 2021-2024)
