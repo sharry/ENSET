@@ -10,6 +10,8 @@
 #include <random>
 #include <chrono>
 #include <cmath>
+#include <string>
+#include <sstream>
 
 template <typename T>
 class LinkedList
@@ -29,6 +31,7 @@ private:
 		}
 	};
 	Node *head;
+	size_t _count;
 
 public:
 	// Constructors
@@ -36,22 +39,12 @@ public:
 	{
 		Node *head = new Node(val);
 		this->head = head;
+		this->_count = 1;
 	}
 	LinkedList()
 	{
 		this->head = NULL;
-	}
-	// Print to the console the elements of the list
-	void display()
-	{
-		auto curr = this->head;
-		while (curr)
-		{
-			std::cout << curr->value;
-			if (curr->next)
-				std::cout << " -> ";
-			curr = curr->next;
-		}
+		this->_count = 0;
 	}
 	// Append to the end of the list
 	void append(T val)
@@ -60,6 +53,7 @@ public:
 		if (!this->head)
 		{
 			this->head = node;
+			this->_count++;
 			return;
 		}
 		auto curr = this->head;
@@ -68,6 +62,7 @@ public:
 			if (!curr->next)
 			{
 				curr->next = node;
+				this->_count++;
 				return;
 			}
 			curr = curr->next;
@@ -84,6 +79,7 @@ public:
 		{
 			node->next = curr;
 			this->head = node;
+			this->_count++;
 			return;
 		}
 		size_t currPos = 0;
@@ -99,6 +95,7 @@ public:
 				}
 				else
 					curr->next = node;
+				this->_count++;
 				return;
 			}
 			currPos++;
@@ -108,14 +105,7 @@ public:
 	// Count the total number of elements
 	size_t count()
 	{
-		size_t c = 0;
-		auto curr = this->head;
-		while (curr)
-		{
-			curr = curr->next;
-			c++;
-		}
-		return c;
+		return _count;
 	}
 	// Count the number of occurrences of an element
 	size_t occurrencesCount(T val)
@@ -156,6 +146,7 @@ public:
 				curr = curr->next;
 			}
 		}
+		this->_count--;
 	}
 	// Delete first node with the given value
 	void deleteFirst(T val)
@@ -176,6 +167,7 @@ public:
 					this->head = curr->next;
 					delete curr;
 				}
+				this->_count--;
 				return;
 			}
 			prev = curr;
@@ -218,6 +210,7 @@ public:
 						this->head = curr->next;
 						delete curr;
 					}
+					this->_count--;
 					return;
 				}
 			}
@@ -235,6 +228,7 @@ public:
 			auto head = this->head;
 			this->head = head->next;
 			delete head;
+			this->_count--;
 			return;
 		}
 		size_t currIndex = 0;
@@ -249,6 +243,7 @@ public:
 					prev->next = curr->next;
 					delete curr;
 				}
+				this->_count--;
 				return;
 			}
 			currIndex++;
@@ -293,11 +288,13 @@ public:
 		return positions;
 	}
 	// Value of the node at the given index
-	T valueAt(size_t index)
+	T at(int index)
 	{
-		if (index > this->count() || index < 0)
-			return NULL;
-		size_t currIndex = 0;
+		int n = this->count();
+		if ((index < 0 ? -1 * index : index) >= n)
+			throw std::invalid_argument("Index out of range");
+		index = (n + index % n) % n;
+		int currIndex = 0;
 		auto curr = this->head;
 		while (curr)
 		{
@@ -420,6 +417,7 @@ public:
 			}
 			curr = curr->next;
 		}
+		this->_count += list->count();
 	}
 	// Convert the list to an array
 	T *toArray()
@@ -438,23 +436,65 @@ public:
 	// Shift the list with given offset, positive offset shifts forward
 	void shift(int offset = 1)
 	{
-		size_t n = this->count();
-		offset = offset - ((offset / n) * n);
-		offset = n + offset;
-		offset = offset - ((offset / n) * n);
+		int n = this->count();
+		offset = (n + offset % n) % n;
 		if (offset == 0)
 			return;
 		else
 		{
 			auto arr = this->toArray();
 			auto curr = this->head;
-			size_t i = 0;
+			int i = 0;
 			while (curr)
 			{
 				curr->value = i - offset < 0 ? arr[i - offset + n] : arr[i - offset];
 				curr = curr->next;
 				i++;
 			}
+		}
+	}
+	// Adds all the elements of an array into a string, separated by the specified separator string
+	std::string join(const char *seperator)
+	{
+		std::ostringstream strm;
+		auto curr = this->head;
+		while (curr)
+		{
+			strm << curr->value;
+			if (curr->next)
+				strm << seperator;
+			curr = curr->next;
+		}
+		return strm.str();
+	}
+	// Check whether the list has an element with the given value
+	bool has(T val)
+	{
+		auto curr = this->head;
+		while (curr)
+		{
+			if (curr->value == val)
+				return true;
+			curr = curr->next;
+		}
+		return false;
+	}
+	// Fill the list with the given value in the given interval (inclusive)
+	void fill(T val, int start = 0, int end = -1)
+	{
+		int n = this->count();
+		end = (n + end % n) % n;
+		start = (n + start % n) % n;
+		if (start > end)
+			return;
+		auto curr = this->head;
+		int i = 0;
+		while (curr)
+		{
+			if (i >= start && i <= end)
+				curr->value = val;
+			i++;
+			curr = curr->next;
 		}
 	}
 };
