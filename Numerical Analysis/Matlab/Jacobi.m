@@ -1,7 +1,14 @@
-function [outputArg1,outputArg2] = Jacobi(inputArg1,inputArg2)
-%JACOBI Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function x = Jacobi(A, b, init, itr)
+n = min(size(A));
+x = init;
+for k = 1 : itr
+    for i = 1 : n
+        sum = 0;
+        for j = 1 : n
+            if j ~= i
+                sum = sum + A(i,j) * x(j);
+            end
+        end
+        x(i) = (1 / A(i,i)) * (b(i) - sum);
+    end
 end
-

@@ -10,3 +10,10 @@ M = Cholesky(matr);
 X = [1, 2, 4];
 Y = [2, 5, 2];
 polynomial = Lagrange(X, Y);
+
+A = [4, -1, 0; -1, 4, -1; 0, -1, 4];
+b = [6 4 6];
+init = [0 0 0];
+
+x = Jacobi(A, b, init, 10);
+y = GaussSeidel(A, b, init, 100);
