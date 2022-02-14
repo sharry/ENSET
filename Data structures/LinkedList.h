@@ -46,28 +46,6 @@ public:
 		this->head = NULL;
 		this->_count = 0;
 	}
-	// Append to the end of the list
-	void append(T val)
-	{
-		Node *node = new Node(val);
-		if (!this->head)
-		{
-			this->head = node;
-			this->_count++;
-			return;
-		}
-		auto curr = this->head;
-		while (curr)
-		{
-			if (!curr->next)
-			{
-				curr->next = node;
-				this->_count++;
-				return;
-			}
-			curr = curr->next;
-		}
-	}
 	// Insert at at given position
 	void insertAt(size_t pos, T val)
 	{
@@ -120,7 +98,29 @@ public:
 		}
 		return c;
 	}
-	// Delete the last element and return its value
+	// Append to the end of the list (Stack)
+	void push(T val)
+	{
+		Node *node = new Node(val);
+		if (!this->head)
+		{
+			this->head = node;
+			this->_count++;
+			return;
+		}
+		auto curr = this->head;
+		while (curr)
+		{
+			if (!curr->next)
+			{
+				curr->next = node;
+				this->_count++;
+				return;
+			}
+			curr = curr->next;
+		}
+	}
+	// Delete the last element and return its value (Stack)
 	T pop()
 	{
 		auto curr = this->head;
@@ -147,6 +147,16 @@ public:
 			}
 		}
 		this->_count--;
+	}
+	// Add to beginning of the list (Queue)
+	void enqueue(T val)
+	{
+		this->insertAt(0, val);
+	}
+	// Delete the last element and return its value (Queue)
+	T dequeue()
+	{
+		return this->pop();
 	}
 	// Delete first node with the given value
 	void deleteFirst(T val)
@@ -496,5 +506,29 @@ public:
 			i++;
 			curr = curr->next;
 		}
+	}
+	// Retuns the sum of the list elements
+	T sum()
+	{
+		auto curr = this->head;
+		T sum = 0;
+		while (curr)
+		{
+			sum += curr->value;
+			curr = curr->next;
+		}
+		return sum;
+	}
+	// Retuns the product of the list elements
+	T prod()
+	{
+		auto curr = this->head;
+		T sum = 1;
+		while (curr)
+		{
+			sum *= curr->value;
+			curr = curr->next;
+		}
+		return sum;
 	}
 };
