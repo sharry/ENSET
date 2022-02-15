@@ -61,7 +61,7 @@ const gcd = (a, b) => {
 }
 
 const toFaction = (number) => {
-	const str = number.toString()
+	let str = number.toString()
 	let len = 0
 	if (str.includes('.') && str.at(0) != '.') len = str.length - 2
 	else if (str.includes('.') && str.at(0) == '.') len = str.length - 1
@@ -71,8 +71,15 @@ const toFaction = (number) => {
 	const divisor = gcd(numerator, denominator)
 	numerator /= divisor
 	denominator /= divisor
-	if (Math.abs(denominator) === 1) return numerator.toFixed().toString()
-	return numerator.toFixed().toString() + '/' + denominator.toFixed().toString()
+	if (Math.abs(denominator) === 1 || Math.abs(denominator) === -1)
+		return numerator.toFixed().toString()
+	str = ''
+	if (numerator < 0 || denominator < 0) {
+		str += '-'
+	}
+	numerator = Math.abs(numerator.toFixed())
+	denominator = Math.abs(denominator.toFixed())
+	return str + numerator.toString() + '/' + denominator.toString()
 }
 
 module.exports = {
