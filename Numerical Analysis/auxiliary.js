@@ -45,10 +45,34 @@ const printPolynomial = (poly) => {
 		if (poly[i] === 0) coeff = ''
 		else if (poly[i] === 1 && i === n - 1) coeff = '1'
 		else if (poly[i] === 1 && i !== n - 1) coeff = ''
-		else coeff = Math.abs(poly[i]).toString()
+		else coeff = toFaction(Math.abs(poly[i]))
+
+		if (coeff.includes('/')) coeff = '(' + coeff + ')'
 		if (poly[i] !== 0) str += sign + coeff + x
 	}
 	console.log(str)
+}
+
+const gcd = (a, b) => {
+	if (!b) return a
+	a = parseInt(a)
+	b = parseInt(b)
+	return gcd(b, a % b)
+}
+
+const toFaction = (number) => {
+	const str = number.toString()
+	let len = 0
+	if (str.includes('.') && str.at(0) != '.') len = str.length - 2
+	else if (str.includes('.') && str.at(0) == '.') len = str.length - 1
+	else return number.toString()
+	var denominator = Math.pow(10, len)
+	var numerator = number * denominator
+	const divisor = gcd(numerator, denominator)
+	numerator /= divisor
+	denominator /= divisor
+	if (Math.abs(denominator) === 1) return numerator.toFixed().toString()
+	return numerator.toFixed().toString() + '/' + denominator.toFixed().toString()
 }
 
 module.exports = {
@@ -56,4 +80,6 @@ module.exports = {
 	superscript,
 	formatMatrixRow,
 	printPolynomial,
+	gcd,
+	toFaction,
 }

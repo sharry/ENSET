@@ -24,15 +24,9 @@ const vandermonde = (Xs, Ys) => {
 	return zeros.map((e) => Number(e.toFixed(2)) + 0)
 }
 
-const polynomial = vandermonde([0, 1, 2], [1, 2, 5])
-aux.printPolynomial(polynomial)
-
 // Lagrange Method
 // Lᵢ(x) = ₍ⱼ₌₀, ⱼ≠ᵢ₎∏ⁿ (x - xⱼ)/(xᵢ - xⱼ)
 // P(x) = ᵢ₌₀Σⁿ yᵢ Lᵢ(x)
-
-const x = [0, 1, 2]
-const y = [1, 2, 5]
 
 const Lagrange = (Xs, Ys, a) => {
 	const n = Xs.length
@@ -47,4 +41,41 @@ const Lagrange = (Xs, Ys, a) => {
 	return P
 }
 
-console.log(Lagrange(x, y, 3))
+// Newton divided differences Method
+
+// f(xᵢ) = yᵢ | i = 0, 1, ..., n
+// 1ˢᵗ divided difference:
+// f(xᵢ, xⱼ) = (f(xⱼ) - f(xᵢ)) / (xⱼ - xᵢ)
+// 2ⁿᵈ divided difference:
+// f(xᵢ, xⱼ, xₖ) = (f(xⱼ, xₖ) - f(xᵢ, xⱼ)) / (xₖ - xᵢ)
+// ...
+// nᵗʰ divided difference:
+// f(xᵢ, xⱼ, xₖ, ..., xₙ) = (f(xⱼ, xₖ, ..., xₙ) - f(xᵢ, xⱼ, ..., xₙ₋₁)) / (xₙ - xᵢ)
+/*
+Example: With 3 data pairs (x₀, y₀), (x₁, y₁), (x₂, y₂)
+┌──────┬────────┬───────────────────────┬───────────────────────────────┐
+│  xᵢ  │  f(xᵢ) │      f(xᵢ, xᵢ₊₁)      │       f(xᵢ, xᵢ₊₁, xᵢ₊₂)       │
+├──────┼────────┼───────────────────────┼───────────────────────────────┤
+│  x₀  │   y₀   ├───────────────────────┤///////////////////////////////│
+├──────┼────────┤ (f(x₁)-f(x₀))/(x₁-x₀) ├───────────────────────────────┤
+│  x₁  │   y₁   ├───────────────────────┤ (f(x₁, x₂)-f(x₀, x₁))/(x₂-x₀) │
+├──────┼────────┤ (f(x₂)-f(x₁))/(x₂-x₁) ├───────────────────────────────┤
+│  x₂  │   y₂   ├───────────────────────┤///////////////////////////////│
+└──────┴────────┴───────────────────────┴───────────────────────────────┘
+
+	P(x) = y₀ + f(x₁, x₂) (x - x₀) + f(x₀, x₁, x₂) (x - x₁)
+
+*/
+
+function Newton(Xs, Ys) {}
+
+// Cubic Splines Method
+
+// Tests
+
+const x = [0, 2 / 3, 1]
+const y = [1, 1 / 2, 0]
+
+const polynomial = vandermonde(x, y)
+aux.printPolynomial(polynomial)
+console.log(Lagrange(x, y, 3).toFixed(2))
