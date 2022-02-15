@@ -45,7 +45,7 @@ const printPolynomial = (poly) => {
 		if (poly[i] === 0) coeff = ''
 		else if (poly[i] === 1 && i === n - 1) coeff = '1'
 		else if (poly[i] === 1 && i !== n - 1) coeff = ''
-		else coeff = toFaction(Math.abs(poly[i]))
+		else coeff = fraction(Math.abs(poly[i]))
 
 		if (coeff.includes('/')) coeff = '(' + coeff + ')'
 		if (poly[i] !== 0) str += sign + coeff + x
@@ -60,7 +60,7 @@ const gcd = (a, b) => {
 	return gcd(b, a % b)
 }
 
-const toFaction = (number) => {
+const fraction = (number) => {
 	let str = number.toString()
 	let len = 0
 	if (str.includes('.') && str.at(0) != '.') len = str.length - 2
@@ -87,6 +87,6 @@ module.exports = {
 	superscript,
 	formatMatrixRow,
 	printPolynomial,
+	fraction,
 	gcd,
-	toFaction,
 }

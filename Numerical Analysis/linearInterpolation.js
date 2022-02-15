@@ -78,4 +78,4 @@ const y = [1, 1 / 2, 0]
 
 const polynomial = vandermonde(x, y)
 aux.printPolynomial(polynomial)
-console.log(aux.toFaction(Lagrange(x, y, 2).toFixed(2)))
+console.log(aux.fraction(Lagrange(x, y, 2).toFixed(2)))
