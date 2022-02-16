@@ -30,7 +30,7 @@ const formatMatrixRow = (row) => {
 	return outStr
 }
 
-const printPolynomial = (poly) => {
+const printPolynomial = (poly, prefix = '') => {
 	const n = poly.length
 	let str = ''
 	for (let i = 0; i < n; i++) {
@@ -50,7 +50,7 @@ const printPolynomial = (poly) => {
 		if (coeff.includes('/')) coeff = '(' + coeff + ')'
 		if (poly[i] !== 0) str += sign + coeff + x
 	}
-	console.log(str)
+	console.log(prefix + str)
 }
 
 const gcd = (a, b) => {
@@ -58,6 +58,17 @@ const gcd = (a, b) => {
 	a = parseInt(a)
 	b = parseInt(b)
 	return gcd(b, a % b)
+}
+
+const multiply = (A, B) => {
+	const m = A.length
+	const n = B.length
+	var prod = []
+	for (var i = 0; i < m + n - 1; i++) prod[i] = 0
+	for (var i = 0; i < m; i++) {
+		for (var j = 0; j < n; j++) prod[i + j] += A[i] * B[j]
+	}
+	return prod
 }
 
 const fraction = (number) => {
@@ -89,4 +100,5 @@ module.exports = {
 	printPolynomial,
 	fraction,
 	gcd,
+	multiply,
 }

@@ -28,17 +28,33 @@ const vandermonde = (Xs, Ys) => {
 // Lᵢ(x) = ₍ⱼ₌₀, ⱼ≠ᵢ₎∏ⁿ (x - xⱼ)/(xᵢ - xⱼ)
 // P(x) = ᵢ₌₀Σⁿ yᵢ Lᵢ(x)
 
-const Lagrange = (Xs, Ys, a) => {
+const Lagrange = (Xs, Ys) => {
 	const n = Xs.length
-	let P = 0
+	let tmp = []
+	let L = []
 	for (let i = 0; i < n; i++) {
-		let L = 1
+		let l = []
 		for (let j = 0; j < n; j++) {
-			if (j !== i) L *= (a - Xs[j]) / (Xs[i] - Xs[j])
+			if (j !== i) {
+				const denom = Xs[i] - Xs[j]
+				l.push(1 / denom)
+				l.push((-1 * Xs[j]) / denom)
+				tmp.push(l)
+				l = []
+			}
 		}
-		P += Ys[i] * L
+		L.push(aux.multiply(tmp[2 * i], tmp[2 * i + 1]))
 	}
-	return P
+	P = []
+	for (let i = 0; i < n; i++) {
+		let sum = 0
+		for (let j = 0; j < n; j++) {
+			sum += Ys[j] * L[j][i]
+			L[j][i] = parseFloat(L[j][i].toFixed(2))
+		}
+		P.push(parseFloat(sum.toFixed(2)))
+	}
+	return { L: L, P: P }
 }
 
 // Newton divided differences Method
@@ -67,7 +83,7 @@ Example: With 3 data pairs (x₀, y₀), (x₁, y₁), (x₂, y₂)
 
 */
 
-function Newton(Xs, Ys) {}
+Newton = (Xs, Ys) => {}
 
 // Cubic Splines Method
 
@@ -76,6 +92,12 @@ function Newton(Xs, Ys) {}
 const x = [0, 2 / 3, 1]
 const y = [1, 1 / 2, 0]
 
-const polynomial = vandermonde(x, y)
-aux.printPolynomial(polynomial)
-console.log(aux.fraction(Lagrange(x, y, 2).toFixed(2)))
+console.log('Vandermonde matrix method: ')
+aux.printPolynomial(vandermonde(x, y))
+
+console.log('\nLagrange method:\n')
+const Ls = Lagrange(x, y).L
+for (let i = 0; i < Ls.length; i++) {
+	aux.printPolynomial(Ls[i], 'L' + aux.subscript(i) + '(x) = ')
+}
+aux.printPolynomial(Lagrange(x, y).P, '\nP = ')
