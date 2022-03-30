@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Exercice3</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="screen">
+				<div class="top-screen"></div>
+				<div class="main-screen" id="main-screen"></div>
+				<div class="pre-result" id="pre-result"></div>
+			</div>
+			<div class="keypad">
+				<div class="numbers">
+					<div class="number" id="seven" onclick="buttonClick('7')">
+						<span>7</span>
+					</div>
+					<div class="number" id="eight" onclick="buttonClick('8')">
+						<span>8</span>
+					</div>
+					<div class="number" id="nine" onclick="buttonClick('9')">
+						<span>9</span>
+					</div>
+					<div class="number" id="four" onclick="buttonClick('4')">
+						<span>4</span>
+					</div>
+					<div class="number" id="five" onclick="buttonClick('5')">
+						<span>5</span>
+					</div>
+					<div class="number" id="six" onclick="buttonClick('6')">
+						<span>6</span>
+					</div>
+					<div class="number" id="one" onclick="buttonClick('1')">
+						<span>1</span>
+					</div>
+					<div class="number" id="two" onclick="buttonClick('2')">
+						<span>2</span>
+					</div>
+					<div class="number" id="three" onclick="buttonClick('3')">
+						<span>3</span>
+					</div>
+					<div class="number" id="dot" onclick="buttonClick('.')">
+						<span>.</span>
+					</div>
+					<div class="number" id="zero" onclick="buttonClick('0')">
+						<span>0</span>
+					</div>
+					<div class="number" id="equals" onclick="buttonClick('=')">
+						<span> = </span>
+					</div>
+				</div>
+				<div class="operations">
+					<div
+						class="operation"
+						data-long-press-delay="500"
+						id="backspace"
+						onclick="buttonClick('Backspace')"
+					>
+						<ion-icon name="backspace-outline"></ion-icon>
+					</div>
+					<div class="operation" id="division" onclick="buttonClick('/')">
+						<span>÷</span>
+					</div>
+					<div class="operation" id="multiplication" onclick="buttonClick('*')">
+						<span>×</span>
+					</div>
+					<div class="operation" id="substraction" onclick="buttonClick('-')">
+						<span> - </span>
+					</div>
+					<div class="operation" id="addition" onclick="buttonClick('+')">
+						<span>+</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/long-press-event@2.4.4/src/long-press-event.min.js"></script>
+		<script src="script.js"></script>
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+		></script>
+		<script
+			nomodule
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+		></script>
+	</body>
+</html>

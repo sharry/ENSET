@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Exercice 2</title>
+	</head>
+	<body>
+		<button onclick="randomize()">Randomize</button>
+		<button onclick="reset()">Reset</button>
+		<table id="the-table" border="1">
+			<tr>
+				<th>
+					<span style="margin: 10px">Monday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="monday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Tuesday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="tuesday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Wednesday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="wednesday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Thursday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="thursday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Friday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="friday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Saturday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="saturday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+				<th>
+					<span style="margin: 10px">Sunday</span>
+					<input
+						type="number"
+						value="100"
+						min="0"
+						max="100"
+						id="sunday-val"
+						style="width: 40px"
+						onchange="updateHeights()"
+					/>
+					<span style="margin-right: 10px">%</span>
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<img id="monday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="tuesday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="wednesday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="thursday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="friday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="saturday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+				<td>
+					<img id="sunday" width="100" src="js.png" alt="JavaScript Logo" />
+				</td>
+			</tr>
+		</table>
+		<script src="script.js"></script>
+	</body>
+</html>

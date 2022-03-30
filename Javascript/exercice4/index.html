@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<script language="JavaScript">
+			text = 'ENSET Mohammedia - GLSID 2021/2024 - BEN SADIK Youssef - '
+			function showTitle() {
+				document.title = text
+				text = text.substring(1, text.length) + text.substring(0, 1)
+				setTimeout('showTitle()', 200)
+			}
+		</script>
+		<title></title>
+	</head>
+	<body onLoad="showTitle()"></body>
+</html>
