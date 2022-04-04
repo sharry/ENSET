@@ -1,0 +1,2 @@
+Taille du fichier exemple1.o : 53 KB
+Taille du fichier exemple2.o : 22 KB

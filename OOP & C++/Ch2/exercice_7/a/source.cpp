@@ -1,4 +1,5 @@
 #include "Hasard.h"
+
 int main(int argc, char const *argv[])
 {
     Hasard suite1(5);
