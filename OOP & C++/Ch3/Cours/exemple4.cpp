@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 {
     // Par valeur
     int test1, test2;
-    Point p1, p2(1), p3(0, 2);
+    Point p1, p2(1), p3(0, 0);
     test1 = p1.coincide(p2);
     test2 = p2.coincide(p1);
     std::cout << "p1 et p2 = " << test1 << " ou " << test2 << std::endl;
@@ -53,27 +53,27 @@ int main(int argc, char const *argv[])
     std::cout << "p1 et p3 = " << test1 << " ou " << test2 << std::endl;
     std::cin.get();
 
-    // Par adresse
-    int test1, test2;
-    Point p1, p2(1), p3(0, 2);
-    test1 = p1.coincideAdresse(&p2);
-    test2 = p2.coincideAdresse(&p1);
-    std::cout << "p1 et p2 = " << test1 << " ou " << test2 << std::endl;
-    test1 = p1.coincideAdresse(&p3);
-    test2 = p3.coincideAdresse(&p1);
-    std::cout << "p1 et p3 = " << test1 << " ou " << test2 << std::endl;
-    std::cin.get();
+    // // Par adresse
+    // int test1, test2;
+    // Point p1, p2(1), p3(0, 0);
+    // test1 = p1.coincideAdresse(&p2);
+    // test2 = p2.coincideAdresse(&p1);
+    // std::cout << "p1 et p2 = " << test1 << " ou " << test2 << std::endl;
+    // test1 = p1.coincideAdresse(&p3);
+    // test2 = p3.coincideAdresse(&p1);
+    // std::cout << "p1 et p3 = " << test1 << " ou " << test2 << std::endl;
+    // std::cin.get();
 
-    // Par référence
-    int test1, test2;
-    Point p1, p2(1), p3(0, 2);
-    test1 = p1.coincideRef(p2);
-    test2 = p2.coincideRef(p1);
-    std::cout << "p1 et p2 = " << test1 << " ou " << test2 << std::endl;
-    test1 = p1.coincideRef(p3);
-    test2 = p3.coincideRef(p1);
-    std::cout << "p1 et p3 = " << test1 << " ou " << test2 << std::endl;
-    std::cin.get();
+    // // Par référence
+    // int test1, test2;
+    // Point p1, p2(1), p3(0, 0);
+    // test1 = p1.coincideRef(p2);
+    // test2 = p2.coincideRef(p1);
+    // std::cout << "p1 et p2 = " << test1 << " ou " << test2 << std::endl;
+    // test1 = p1.coincideRef(p3);
+    // test2 = p3.coincideRef(p1);
+    // std::cout << "p1 et p3 = " << test1 << " ou " << test2 << std::endl;
+    // std::cin.get();
 
     return 0;
 }

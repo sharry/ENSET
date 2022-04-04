@@ -8,19 +8,16 @@ private:
 
 public:
     Point(int abs = 0, int ord = 0) : x(abs), y(ord) {}
-    Point &symmetric() const;
-    void afficher() const;
+    Point &symmetric() const
+    {
+        static Point p(-x, -y);
+        return p;
+    }
+    void afficher() const
+    {
+        std::cout << "(" << x << "," << y << ")" << std::endl;
+    }
 };
-
-Point &Point::symmetric() const
-{
-    static Point p(-x, -y);
-    return p;
-}
-void Point::afficher() const
-{
-    std::cout << "(" << x << "," << y << ")" << std::endl;
-}
 
 int main(int argc, char const *argv[])
 {

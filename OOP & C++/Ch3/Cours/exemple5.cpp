@@ -9,6 +9,8 @@ public:
     Vector(float, float);
     void homothetie(float);
     Vector homothetie(float) const;
+    // Vector *homothetie(float) const;
+    // Vector &homothetie(float) const;
     void afficher() const;
     float determinant(Vector) const;
     float determinantAdresse(Vector *) const;
@@ -22,6 +24,24 @@ void Vector::homothetie(float facteur)
     x *= facteur;
     y *= facteur;
 }
+// Par valeur
+Vector Vector::homothetie(float facteur) const
+{
+    Vector v(x * facteur, y * facteur);
+    return v;
+}
+// // Par adresse
+// Vector *Vector::homothetie(float facteur) const
+// {
+//     Vector *v = new Vector(x * facteur, y * facteur);
+//     return v;
+// }
+// // Par référence
+// Vector &Vector::homothetie(float facteur) const
+// {
+//     Vector v(x * facteur, y * facteur);
+//     return v;
+// }
 void Vector::afficher() const
 {
     std::cout << "(" << x << "," << y << ")" << std::endl;

@@ -19,7 +19,7 @@ void Point::affiche() const
 
 int Point::coincide(Point *p) const
 {
-    return (x == p->x && y == p->y);
+    return (this->x == p->x && this->y == p->y);
 }
 
 int main(int argc, char const *argv[])
