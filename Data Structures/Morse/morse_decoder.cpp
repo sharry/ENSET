@@ -6,9 +6,10 @@ class MorseDecoder
 private:
     char letter;
     MorseDecoder *dash, *dot;
+    
+    MorseDecoder(char letter) : letter(letter), dash(nullptr), dot(nullptr) {}
 
 public:
-    MorseDecoder(char letter) : letter(letter), dash(nullptr), dot(nullptr) {}
     MorseDecoder()
     {
         letter = '\0';
