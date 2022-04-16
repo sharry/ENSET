@@ -6,6 +6,15 @@ private:
     char letter;
     MorseDecoder *dash, *dot;
     MorseDecoder(char letter) : letter(letter), dash(nullptr), dot(nullptr) {}
+    char decode_letter(std::string const morse) const
+    {
+        if (morse[0] == '.')
+            return dot->decode_letter(morse.substr(1));
+        else if (morse[0] == '-')
+            return dash->decode_letter(morse.substr(1));
+        else
+            return letter;
+    }
 
 public:
     MorseDecoder()
@@ -39,16 +48,7 @@ public:
         dash->dash->dot->dash = new MorseDecoder('q');
     }
 
-    char decode_letter(std::string const morse) const
-    {
-        if (morse[0] == '.')
-            return dot->decode_letter(morse.substr(1));
-        else if (morse[0] == '-')
-            return dash->decode_letter(morse.substr(1));
-        else
-            return letter;
-    }
-    std::string decode(std::string const morse) const
+        std::string decode(std::string const morse) const
     {
         std::string encoded_letter = "";
         std::string decoded = "";
