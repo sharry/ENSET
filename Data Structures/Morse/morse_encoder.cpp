@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sstream>
-#include <vector>
 
 std::string morse(char c)
 {
@@ -19,27 +18,26 @@ std::string morse(char c)
     return strm.str();
 }
 
-std::vector<std::string> encode()
+std::string encode(std::string text)
 {
-    std::vector<std::string> result;
-    std::string token;
-    std::cin >> token;
-    for (int i = 0; i < token.size(); i++)
-        result.push_back(morse(token[i]));
-    return result;
+    std::string encoded = "";
+    for (int i = 0; i < text.size(); i++)
+    {
+        if (text[i] == ' ')
+            encoded += '/';
+        else
+            encoded += morse(tolower(text[i]));
+        if (i != text.size() - 1)
+            encoded += ' ';
+    }
+    return encoded;
 }
 
 int main(int argc, char const *argv[])
 {
-    std::cout << "Encoding : ";
-    auto encoded = encode();
-    std::cout << '{';
-    for (auto letter : encoded)
-    {
-        std::cout << '"' << letter << '"';
-        if (letter != encoded.back())
-            std::cout << ", ";
-    }
-    std::cout << '}';
+    std::cout << "Enter the text to encode: ";
+    std::string text;
+    std::getline(std::cin, text);
+    std::cout << "\n(" << text << ") in morse code: " << encode(text) << std::endl;
     return 0;
 }
